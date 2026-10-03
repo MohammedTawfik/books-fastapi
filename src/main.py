@@ -13,3 +13,11 @@ books = [
 @app.get("/api/v1/books")
 def get_books():
     return books
+
+
+@app.get("/api/v1/books/{book_title}")
+def get_book(book_title: str):
+    for book in books:
+        if book["Title"].casefold() == book_title.casefold():
+            return book
+    return {"message": "Book not found"}
